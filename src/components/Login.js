@@ -15,8 +15,8 @@ const Login = (props) => {
           const token = localStorage.getItem('token');
           if (token) {
               try {
-                console.log("workjing" + token)
-                  const host = "http://localhost:5000";
+          
+                  const host = "https://inotebook-backend-2-8kpe.onrender.com";
                   const response = await fetch(`${host}/api/auth/getuser`, {
                       method: 'POST',
                       headers: {
@@ -25,10 +25,10 @@ const Login = (props) => {
                       },
                   });
                   const json = await response.json();
-                  console.log(json)
+                 
                   if (json) {
                       setIsAuthenticated(true);
-                      console.log('good')
+                     
                       history.push("/");
                   }
               } catch (error) {
@@ -45,7 +45,7 @@ const Login = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const host = "http://localhost:5000";
+        const host = "https://inotebook-backend-2-8kpe.onrender.com";
         const response = await fetch(`${host}/api/auth/login`, {
             method: 'POST',
             headers: {

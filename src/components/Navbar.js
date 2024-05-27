@@ -11,13 +11,14 @@ const Navbar = (props) => {
   const [isok,setisok] = useState(false);
   
 useEffect(()=>{
+  getuser(localStorage.getItem('token'));
   
 },[location])
 
 const logout=()=>{
  
   localStorage.removeItem('token')
-  history.push('/login')
+
   props.ShowAlert("successfully log out", "warning")
 
 }
@@ -50,7 +51,7 @@ const logout=()=>{
               </>
             ) : (
               <div className="d-flex align-items-center mx-2 my-2" >
-                <span className="navbar-text mx-2" style={{color:'black',backgroundColor:'whte',borderRadius:'10px'}}>Hello {name}</span>
+                <span className="navbar-text mx-2 my-2" style={{color:'white',borderRadius:'10px'}}>Hello {name}</span>
                 <button className="btn btn-outline-danger" onClick={logout}>Logout</button>
               </div>
             )}

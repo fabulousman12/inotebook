@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import NoteContext from "./NoteContext";
 
 const NoteState = (props) => {
-  const host = "http://localhost:5000";
+  const host = "https://inotebook-backend-2-8kpe.onrender.com";
   const [notes, setNotes] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [name, setName] = useState(null);
@@ -85,6 +85,7 @@ const NoteState = (props) => {
       }
     });
     const json = await response.json();
+    
     setName(json.name);
   };
 

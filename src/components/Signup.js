@@ -13,8 +13,8 @@ const Signup = (props) => {
   const handleClick=async(e)=>{
     e.preventDefault();
     const {name,email,password,cpassword} = credential;
-    const host = "http://localhost:5000";
-    const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
+    const host = "https://inotebook-backend-2-8kpe.onrender.com";
+    const response = await fetch(`${host}/api/auth/createuser`, {
 
         method: 'POST',
         headers: {

@@ -47,7 +47,7 @@ function App() {
                 <Alert alert={alert} />
                 <div className="container">
                     <Switch>
-                    <Route exact path="/" render={(props) => isAuthenticated ? <Home {...props} ShowAlert={ShowAlert} /> : <Redirect to="/login" />} />
+                    <Route exact path="/" render={(props) => isAuthenticated ? <Home {...props} ShowAlert={ShowAlert} /> : <Login {...props} onLoginSuccess={handleLoginSuccess} ShowAlert={ShowAlert} />} />
                         <Route exact path="/about" component={About} />
                         <Route exact path="/home" render={(props) => <Home {...props}  ShowAlert={ShowAlert} />} />
                         <Route exact path="/login" render={(props) => <Login {...props} onLoginSuccess={handleLoginSuccess} ShowAlert={ShowAlert} />} />
