@@ -36,4 +36,8 @@
   .icon:hover {
     color: #9e9393;
   }
-  
+  .custom-textarea {
+    width: 100%; /* Adjust width as needed */
+    height: 200px; /* Adjust height as needed */
+    /* Add any other custom styles as needed */
+}

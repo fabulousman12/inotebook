@@ -68,3 +68,33 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# 📚 EnoteBook Backend
+
+Welcome to the **EnoteBook Backend** — a Node.js and Express-based server for managing personal notes and categorized image-based study materials. This backend powers the EnoteBook frontend with secure authentication, note/image CRUD operations, and category-based organization.
+
+---
+
+## 🚀 Features
+
+- ✅ JWT-based User Authentication (Signup / Login)
+- 📝 CRUD for Text Notes
+- 🖼️ Image Upload with Categorization
+- 🗃️ Category Filtering (Maths, Physics, Bio, etc.)
+- 📦 RESTful APIs
+- 🌐 CORS Enabled for Frontend Integration
+- 🐳 Dockerized for Easy Deployment
+
+---
+
+## 📁 Project Structure
+
+```bash
+.
+├── routes/           # API endpoints (auth, notes, image)
+├── models/           # Mongoose data models
+├── middleware/       # Auth middleware and file upload
+├── .gitignore
+├── Dockerfile
+├── db.js             # MongoDB connection logic
+├── index.js          # Main server entry point
+└── package.json

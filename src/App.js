@@ -1,17 +1,20 @@
 import React,{useState,useEffect} from 'react';
 
-import { BrowserRouter as Router, Route,Switch,Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
 import './App.css';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
 import NoteState from './context/notes/NoteState';
+
 import { Alert } from './components/Alert';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import './NoteItem.css';
 import "./login.css";
 import "./Signin.css";
+import Notesimage from './components/Notesimage';
+import Mydetails from './components/Mydetails';
 function App() {
     
 
@@ -42,6 +45,7 @@ function App() {
     <>
 
 <NoteState>
+
             <Router>
                 <Navbar ShowAlert={ShowAlert} />
                 <Alert alert={alert} />
@@ -52,9 +56,12 @@ function App() {
                         <Route exact path="/home" render={(props) => <Home {...props}  ShowAlert={ShowAlert} />} />
                         <Route exact path="/login" render={(props) => <Login {...props} onLoginSuccess={handleLoginSuccess} ShowAlert={ShowAlert} />} />
                         <Route exact path="/signup" render={(props) => <Signup {...props} onLoginSuccess={handleLoginSuccess} ShowAlert={ShowAlert} />} />
+                        <Route exact path="/notesimg" render={(props) => <Notesimage {...props} onLoginSuccess={handleLoginSuccess} ShowAlert={ShowAlert} />} />
+                        <Route exact path="/MyNotes" render={(props) => <Mydetails {...props} onLoginSuccess={handleLoginSuccess} ShowAlert={ShowAlert} />} />
                     </Switch>
                 </div>
             </Router>
+            
         </NoteState>
     </>
   );

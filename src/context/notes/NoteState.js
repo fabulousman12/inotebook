@@ -2,19 +2,15 @@ import React, { useState, useEffect } from "react";
 import NoteContext from "./NoteContext";
 
 const NoteState = (props) => {
-  const host = "https://inotebook-backend-2-8kpe.onrender.com";
+  const host = ""; // Change this to your backend URL
   const [notes, setNotes] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [name, setName] = useState(null);
+  const [chosecat, setchosecat] = useState("All");
+  const [images, setImages] = useState([]);
+  const categories = ['All','Maths', 'Physics', 'Bio', 'Chem' , 'Stat' , 'Computer' , 'English' , 'Constituition','Electronics','tech','Biochem','others'];
 
   // Check for token and set authentication state
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsAuthenticated(true);
-      getuser(token); // Fetch user data if authenticated
-    }
-  }, []);
 
   // Get notes
   const getNote = async (token) => {
@@ -88,9 +84,52 @@ const NoteState = (props) => {
     
     setName(json.name);
   };
+  // get the img
+  const getimg = async () => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${host}/api/img/files`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Auth': token
+      }
+    });
+    const json = await response.json();
+ 
+    setImages(json);
+    return json;
+  };
+
+  // Delete an image
+  const deleteimg = async (imgid) => {
+    const token = localStorage.getItem('token');
+    await fetch(`${host}/api/img/delete/${imgid}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Auth': token
+      }
+    });
+    setImages(images.filter(img => img._id !== imgid));
+  };
+
+  // Add an 
+  const Imgadd = async (formData) => {
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(`${host}/api/img/upload`, {
+      method: 'POST',
+      headers: {
+        'Auth': token,
+      },
+      body: formData
+    });
+    const json = await response.json();
+    setImages((prevImages) => [...prevImages, json]);
+  };
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNote, isAuthenticated, getuser, name,setIsAuthenticated }}>
+    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNote, isAuthenticated, getuser, name,setIsAuthenticated,host,categories,getimg,chosecat, setchosecat,images,deleteimg,Imgadd }}>
       {props.children}
     </NoteContext.Provider>
   );

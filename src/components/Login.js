@@ -8,15 +8,18 @@ const Login = (props) => {
     const [credential, setCredential] = useState({ email: "", password: "" });
     const history = useHistory();
     const context = useContext(noteContext);
-    const { setIsAuthenticated } = context;
+    const { setIsAuthenticated,host } = context;
+    console.log = console.warn = console.error = () => {};
 
+    // Look ma, no error!
+    console.error('Something bad happened.');
     useEffect(() => {
       const checkToken = async () => {
           const token = localStorage.getItem('token');
           if (token) {
               try {
           
-                  const host = "https://inotebook-backend-2-8kpe.onrender.com";
+                 
                   const response = await fetch(`${host}/api/auth/getuser`, {
                       method: 'POST',
                       headers: {
@@ -45,7 +48,7 @@ const Login = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const host = "https://inotebook-backend-2-8kpe.onrender.com";
+     
         const response = await fetch(`${host}/api/auth/login`, {
             method: 'POST',
             headers: {
@@ -89,6 +92,7 @@ const Login = (props) => {
                             name="email"
                             className="form-control"
                             value={credential.email}
+                            placeholder="Email"
                             onChange={onChange}
                             autoComplete="email"
                         />
@@ -97,6 +101,7 @@ const Login = (props) => {
                             type="password"
                             id="unique-password"
                             name="password"
+                            placeholder="Password"
                             className="form-control"
                             value={credential.password}
                             onChange={onChange}

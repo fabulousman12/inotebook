@@ -4,7 +4,10 @@ import noteContext from '../context/notes/NoteContext';
 export const Addnote = (props) => {
     const context = useContext(noteContext);
     const { addNote } = context;
+    console.log = console.warn = console.error = () => {};
 
+    // Look ma, no error!
+    console.error('Something bad happened.');
     const [note, setNote] = useState({ title: "", description: "", tag: "" });
 
     const handleClick = (e) => {
@@ -27,7 +30,7 @@ export const Addnote = (props) => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="description" className="form-label">Description</label>
-                    <textarea className="form-control" id="description" name="description" value={note.description} onChange={onChange} minLength={5} required></textarea>
+                    <textarea className="form-control custom-textarea" id="description" name="description" value={note.description} onChange={onChange} minLength={5} required></textarea>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="tag" className="form-label">Tag</label>

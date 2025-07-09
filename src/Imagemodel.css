@@ -1,0 +1,116 @@
+.modal-dialog {
+    max-width: 90%;
+}
+
+.img-fluid {
+    max-height: 80vh;
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+}
+.card{
+    width: 25rem;
+    margin: 20px;
+    
+}
+
+.image-title-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.red-close-button {
+    background-color: red;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    padding: 0.5em 0.75em;
+    cursor: pointer;
+    outline: none;
+}
+
+.red-close-button:hover {
+    background-color: darkred;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .modal-dialog {
+        max-width: 95%;
+        margin: 10px;
+    }
+    .card{
+        width: 20rem;
+    }
+
+    .modal-content {
+        height: auto;
+    }
+
+    .img-fluid {
+        max-height: 60vh;
+    }
+
+    .image-title-overlay {
+        font-size: 1em;
+        bottom: 10px;
+        left: 10px;
+        padding: 5px;
+    }
+
+    .red-close-button {
+        font-size: 1em;
+        padding: 0.25em 0.5em;
+    }
+}
+
+@media (max-width: 576px) {
+    .modal-dialog {
+        max-width: 100%;
+        margin: 5px;
+    }
+
+    .img-fluid {
+        max-height: 50vh;
+    }
+
+    .image-title-overlay {
+        font-size: 0.9em;
+        bottom: 5px;
+        left: 5px;
+        padding: 3px;
+    }
+
+    .red-close-button {
+        font-size: 0.9em;
+        padding: 0.2em 0.4em;
+    }
+}
+
+@media (max-width: 400px) {
+    .modal-dialog {
+        max-width: 100%;
+        margin: 2px;
+    }
+
+    .img-fluid {
+        max-height: 40vh;
+    }
+
+    .image-title-overlay {
+        font-size: 0.8em;
+        bottom: 3px;
+        left: 3px;
+        padding: 2px;
+    }
+
+    .red-close-button {
+        font-size: 0.8em;
+        padding: 0.2em 0.4em;
+    }
+}

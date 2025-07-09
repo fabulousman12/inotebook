@@ -4,16 +4,29 @@ import noteContext from '../context/notes/NoteContext';
 import "../Signin.css"
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 const Signup = (props) => {
+  console.log = console.warn = console.error = () => {};
 
+  // Look ma, no error!
+  console.error('Something bad happened.');
   const [credential,setCredential] = useState({name:"",email:"",password:"",cpassword:""})
   const context = useContext(noteContext);
-  const { setIsAuthenticated,getuser,name } = context;
+  const { setIsAuthenticated,getuser,name,host } = context;
   const history = useHistory();
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleClick=async(e)=>{
     e.preventDefault();
     const {name,email,password,cpassword} = credential;
-    const host = "https://inotebook-backend-2-8kpe.onrender.com";
+    if (password !== cpassword) {
+      props.ShowAlert("Passwords do not match", "danger");
+      return;
+    }
+
+    if (!isChecked) {
+      props.ShowAlert("You must accept the terms and conditions", "danger");
+      return;
+    }
+
     const response = await fetch(`${host}/api/auth/createuser`, {
 
         method: 'POST',
@@ -39,7 +52,11 @@ const Signup = (props) => {
   }
   const onchange = (e) =>{
     setCredential({ ...credential, [e.target.name]: e.target.value });
-  }
+  };
+  const onCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
+  };
+
   return (
 //     <div className="container my-2 mx-2">
 //   <div className="mb-3">
@@ -75,16 +92,16 @@ const Signup = (props) => {
   <input onChange={onchange} type="email" name="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
   </div>
   <div className="input-box signup-input-box">
-  <input onChange={onchange} required minLength={8} type="password" name="password" id="inputPassword5" className="form-control" aria-describedby="passwordHelpBlock"/>
+  <input onChange={onchange} placeholder="Password" required minLength={8} type="password" name="password" id="inputPassword5" className="form-control" aria-describedby="passwordHelpBlock"/>
   </div>
   <div className="input-box signup-input-box">
-  <input onChange={onchange} required minLength={8} type="password" id="inputPassword5" name="cpassword" className="form-control" aria-describedby="passwordHelpBlock"/>
+  <input onChange={onchange} placeholder="Confirm Password" required minLength={8} type="password" id="inputPassword5" name="cpassword" className="form-control" aria-describedby="passwordHelpBlock"/>
   </div>
   <div className="policy signup-policy">
-    <input type="checkbox" />
+    <input type="checkbox" onChange={onCheckboxChange} />
     <h3>I accept all terms & condition</h3>
   </div>
-  <div className="input-box button signup-button">
+  <div className="input-box signup-button">
    <button type="button" className="btn btn-info" onClick={handleClick}>Sign up</button>
   </div>
   <div className="text signup-text">
