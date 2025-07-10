@@ -102,68 +102,152 @@ console.error('Something bad happened.');
                 Launch second modal
             </button>
 
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{color:'black'}}>
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Note</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <form>
-                                <div className="mb-3">
-                                    <label htmlFor="etitle" className="form-label">Title</label>
-                                    <input type="text" className="form-control" id="etitle" name="etitle" value={note.etitle} onChange={onChange} minLength={3} required/>
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="edescription" className="form-label">Description</label>
-                                    <textarea className="form-control custom-textarea" id="edescription" name="edescription" value={note.edescription} onChange={onChange} minLength={5} required ></textarea>
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="etag" className="form-label">Tag</label>
-                                    <input type="text" className="form-control" id="etag" name="etag" value={note.etag} onChange={onChange} />
-                                </div>
-                            </form>
-                        </div>
-                       
+{/* Edit Note Modal */}
+<div
+  className="modal fade"
+  id="exampleModal"
+  tabIndex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div className="modal-dialog">
+    <div className="modal-content text-dark bg-light rounded-3 shadow">
+      <div className="modal-header">
+        <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Note</h1>
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div className="modal-body">
+        <form>
+          <div className="mb-3">
+            <label htmlFor="etitle" className="form-label fw-semibold">Title</label>
+            <input
+              type="text"
+              className="form-control border border-primary-subtle rounded-2 shadow-sm"
+              id="etitle"
+              name="etitle"
+              value={note.etitle}
+              onChange={onChange}
+              minLength={3}
+              required
+              placeholder="Enter title"
+            />
+          </div>
 
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" ref={refClose}>Close</button>
-                            <button type="button" className="btn btn-primary" disabled={note.etitle.length<3 || note.edescription.length<5} onClick={handleClick}>Update Changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="modal fade text-dark" id="secondModal" tabIndex="-1" aria-labelledby="secondModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="secondModalLabel">Your note</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <form>
-                                <div className="mb-3">
-                                    <label htmlFor="etitle" className="form-label">Title</label>
-                                    <input type="text" className="form-control" id="etitle" name="etitle" value={havenote.title} minLength={3} required />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="edescription" className="form-label">Description</label>
-                                    <textarea className="form-control  custom-textarea" id="edescription" name="edescription" value={havenote.description}  minLength={5} required ></textarea>
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="etag" className="form-label">Tag</label>
-                                    <input type="text" className="form-control" id="etag" name="etag" value={havenote.tag}  />
-                                </div>
-                            </form>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" ref={refCloseSecondModal}>Close</button>
-                       
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <div className="mb-3">
+            <label htmlFor="edescription" className="form-label fw-semibold">Description</label>
+            <textarea
+              className="form-control custom-textarea border border-primary-subtle rounded-2 shadow-sm"
+              id="edescription"
+              name="edescription"
+              value={note.edescription}
+              onChange={onChange}
+              minLength={5}
+              required
+              placeholder="Enter description"
+              rows="4"
+              style={{ resize: "vertical" }}
+            ></textarea>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="etag" className="form-label fw-semibold">Tag</label>
+            <input
+              type="text"
+              className="form-control border border-secondary-subtle rounded-2 shadow-sm"
+              id="etag"
+              name="etag"
+              value={note.etag}
+              onChange={onChange}
+              placeholder="e.g. Work, Personal, Study"
+            />
+          </div>
+        </form>
+      </div>
+      <div className="modal-footer">
+        <button
+          type="button"
+          className="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+          ref={refClose}
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          disabled={note.etitle.length < 3 || note.edescription.length < 5}
+          onClick={handleClick}
+        >
+          Update Changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{/* View Note Modal */}
+{/* View Note Modal */}
+<div
+  className="modal fade"
+  id="secondModal"
+  tabIndex="-1"
+  aria-labelledby="secondModalLabel"
+  aria-hidden="true"
+>
+  <div className="modal-dialog modal-lg">
+    <div className="modal-content bg-light text-dark rounded-3 shadow">
+      <div className="modal-header">
+        <h1 className="modal-title fs-5" id="secondModalLabel">Your Note</h1>
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div className="modal-body">
+        <div className="mb-3">
+          <label className="form-label fw-semibold">Title</label>
+          <p className="form-control-plaintext border rounded px-3 py-2 bg-white">
+            {havenote.title || <em className="text-muted">No title</em>}
+          </p>
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-semibold">Description</label>
+          <div className="form-control-plaintext border rounded px-3 py-2 bg-white" style={{ whiteSpace: 'pre-wrap' }}>
+            {havenote.description || <em className="text-muted">No description</em>}
+          </div>
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label fw-semibold">Tag</label>
+          <p className="form-control-plaintext border rounded px-3 py-2 bg-white">
+            {havenote.tag || <em className="text-muted">No tag</em>}
+          </p>
+        </div>
+      </div>
+      <div className="modal-footer">
+        <button
+          type="button"
+          className="btn btn-secondary"
+          data-bs-dismiss="modal"
+          ref={refCloseSecondModal}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
             <div className="container row my-3">
             <div style={styles.container}>
       <input 

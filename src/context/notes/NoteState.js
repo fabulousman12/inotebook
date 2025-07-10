@@ -25,9 +25,11 @@ const NoteState = (props) => {
     setNotes(json);
   };
 
-  // Add a note
-  const addNote = async (title, description, tag) => {
+  // Add a noteV
+const addNote = async (title, description, tag) => {
+  try {
     const token = localStorage.getItem('token');
+
     const response = await fetch(`${host}/api/notes/addnote`, {
       method: 'POST',
       headers: {
@@ -36,9 +38,40 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag })
     });
+
+    if (!response.ok) {
+      console.error(`Server responded with status ${response.status}`);
+      return;
+    }
+
     const json = await response.json();
+
+    if (!json || !json.title || !json.description) {
+      console.warn("Invalid or empty response received.");
+      return;
+    }
+
+    // Normalize title + description for comparison
+    const newTitle = json.title.trim().toLowerCase();
+    const newDescription = json.description.trim().toLowerCase();
+
+    const alreadyExists = notes.some(
+      (note) =>
+        note.title.trim().toLowerCase() === newTitle &&
+        note.description.trim().toLowerCase() === newDescription
+    );
+
+    if (alreadyExists) {
+      console.warn("Duplicate note detected, not adding to UI.");
+      return;
+    }
+
     setNotes((prevNotes) => [...prevNotes, json]);
-  };
+    console.log("Note added:", json);
+  } catch (error) {
+    console.error("Failed to add note:", error);
+  }
+};
 
   // Delete a note
   const deleteNote = async (id) => {
@@ -85,20 +118,28 @@ const NoteState = (props) => {
     setName(json.name);
   };
   // get the img
-  const getimg = async () => {
-    const token = localStorage.getItem('token');
-    const response = await fetch(`${host}/api/img/files`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Auth': token
-      }
-    });
-    const json = await response.json();
- 
-    setImages(json);
-    return json;
-  };
+const getimg = async (offset = 1) => {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${host}/api/img/files?offset=${offset}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Auth': token
+    }
+  });
+
+  const json = await response.json();
+
+  setImages(prevImages => {
+    const existingIds = new Set(prevImages.map(img => img._id));
+    const newImages = json.filter(img => !existingIds.has(img._id));
+    return [...prevImages, ...newImages];
+  });
+  console.log(json);
+
+  return json;
+};
+
 
   // Delete an image
   const deleteimg = async (imgid) => {
@@ -129,7 +170,7 @@ const NoteState = (props) => {
   };
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNote, isAuthenticated, getuser, name,setIsAuthenticated,host,categories,getimg,chosecat, setchosecat,images,deleteimg,Imgadd }}>
+    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNote, isAuthenticated, getuser, name,setIsAuthenticated,host,categories,getimg,chosecat, setchosecat,images,deleteimg,Imgadd,setNotes }}>
       {props.children}
     </NoteContext.Provider>
   );

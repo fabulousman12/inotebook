@@ -6,7 +6,7 @@ import '../Imagemodel.css';
 import { Buffer } from 'buffer';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
-
+import './Imagemodel.css';
 const Mynotesimg = ({ image, name, category, comment, imageid }) => {
     const context = useContext(NoteContext);
     const { deleteimg } = context;
@@ -96,38 +96,23 @@ const Mynotesimg = ({ image, name, category, comment, imageid }) => {
                 </div>
             )}
 
-            {lightboxOpen && (
-                <Lightbox
-                    mainSrc={imageUrls[currentImageIndex]}
-                    nextSrc={imageUrls[(currentImageIndex + 1) % imageUrls.length]}
-                    prevSrc={imageUrls[(currentImageIndex + imageUrls.length - 1) % imageUrls.length]}
-                    onCloseRequest={closeLightbox}
-                    onMovePrevRequest={() =>
-                        setCurrentImageIndex((currentImageIndex + imageUrls.length - 1) % imageUrls.length)
-                    }
-                    onMoveNextRequest={() =>
-                        setCurrentImageIndex((currentImageIndex + 1) % imageUrls.length)
-                    }
-                    toolbarButtons={[
-                        <button
-                            key="downloadAll"
-                            className="btn btn-info"
-                            style={{
-                                color: 'white',
-                                padding: '10px 20px',
-                                border: 'none',
-                                borderRadius: '5px',
-                                cursor: 'pointer',
-                                marginLeft: '10px',
-                            }}
-                            onClick={downloadAllImagesAsZip}
-                        >
-                            <i className="fa fa-download me-2"></i>
-                            Download All
-                        </button>
-                    ]}
-                />
-            )}
+   {lightboxOpen && (
+  <div className="fullscreen-modal" onClick={closeLightbox}>
+    <div className="top-buttons" onClick={(e) => e.stopPropagation()}>
+      <button className="btn btn-danger" onClick={closeLightbox}>✕ Close</button>
+      <button className="btn btn-secondary" onClick={downloadAllImagesAsZip}>
+        ⬇ Download 
+      </button>
+    </div>
+    <img
+      src={imageUrls[currentImageIndex]}
+      alt={`img-${currentImageIndex}`}
+      className="fullscreen-image"
+      onClick={(e) => e.stopPropagation()}
+    />
+  </div>
+)}
+
         </div>
     );
 };

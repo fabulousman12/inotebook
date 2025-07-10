@@ -2,7 +2,7 @@ import React, { useEffect,useContext, useState,useRef } from 'react'
 import { Link, useLocation,useHistory } from "react-router-dom";
 
 import NoteContext from '../context/notes/NoteContext';
-
+import './Navbar.css'
 const Navbar = (props) => {
   const context = useContext(NoteContext);
   const { isAuthenticated,getuser,name,getimg,categories ,setchosecat,chosecat} = context;
@@ -46,24 +46,41 @@ if (dropdown) {
         <li className="nav-item">
           <Link className={`nav-link ${location.pathname==="/"?"active":""}`} aria-current="page" to="/">Home</Link>
         </li>
-     
-        <li className="nav-item dropdown">
-          <a className={`nav-link  ${location.pathname==="/notesimg"?"active":""} dropdown-toggle`} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Categories
-          </a>
-          <ul className="dropdown-menu" ref={dropdownRef}>
+   <li className="nav-item dropdown">
+  <a
+    className={`nav-link dropdown-toggle ${location.pathname === "/notesimg" ? "active" : ""}`}
+    href="#"
+    role="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+    ref={dropdownRef}
+  >
+    Categories
+  </a>
+  <ul className="dropdown-menu">
+    {categories.map((category, index) => (
+      <li key={index}>
+        <button
+          className="dropdown-item"
+          onClick={() => {
+            setchosecat(category);
+            history.push('/notesimg');
 
-            
+            // Close the dropdown
+            const toggleBtn = dropdownRef.current;
+            if (toggleBtn) {
+              const instance = window.bootstrap.Dropdown.getInstance(toggleBtn);
+              if (instance) instance.hide();
+            }
+          }}
+        >
+          {category}
+        </button>
+      </li>
+    ))}
+  </ul>
+</li>
 
-             {categories.map((category, index) => (
-                    <li key={index} > 
-                        <Link to="/notesimg" ref={dropdownRef} className={`nav-link ${location.pathname===category?"active":""}`}style={{color:"black"}} onClick={()=>handle(category)}>{category}</Link>
-                        
-                    </li>
-                ))}
-           
-          </ul>
-        </li>
         <li className="nav-item">
           <Link className={`nav-link ${location.pathname==="/MyNotes"?"active":""}`}  to="/MyNotes">MyNotes</Link>
         </li> 

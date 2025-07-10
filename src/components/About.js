@@ -1,71 +1,66 @@
-
-import React, {useContext, useEffect}from 'react'
-
-import '../About.css'; // Assuming you have some CSS for styling
+import React from 'react';
+import '../About.css'; // Keep your custom styles if needed
 
 const About = () => {
- 
   return (
-   <div className="about-container container">
-      <h1>About eNotebook</h1>
-      <p>
-        Welcome to eNotebook, your go-to solution for creating, saving, and managing your notes
-        efficiently. Whether you're a student, professional, or just someone who loves to jot down
-        thoughts, eNotebook is designed to cater to all your note-taking needs.
-      </p>
-      
-      <h2>Features</h2>
-      <ul>
-        <li>Easy-to-use interface for creating and organizing notes</li>
-        <li>Securely save notes in the database for access anytime, anywhere</li>
-        <li>Search functionality to quickly find the notes you need</li>
-        <li>Responsive design, making it accessible on all devices</li>
-      </ul>
-      
-      <h2>How It Works</h2>
-      <p>
-        Using eNotebook is straightforward. Simply sign up or log in to your account, and you'll
-        be able to create and manage your notes with ease. Your notes are securely stored in our
-        database, ensuring that your data is safe and accessible whenever you need it.
-      </p>
-      
-      <h2>Our Mission</h2>
-      <p>
-        Our mission is to provide a seamless and efficient note-taking experience. We understand
-        the importance of having a reliable place to store your thoughts, ideas, and information.
-        With eNotebook, you can focus on what matters most without worrying about losing your notes.
-      </p>
-      
-      <h2>Get in Touch</h2>
-      <p>
-        We value your feedback and are here to help with any questions or issues you may have.
-        Feel free to reach out to us through our contact page or email us at officialaccjit@gmail.com.
-      </p>
-      <form
-      action="https://api.web3forms.com/submit"
-      method="POST"
-      className="contact-form"
-    >
-      {/* Replace with your Access Key */}
-      <input type="hidden" name="access_key" value="fcd1603a-3c2d-418c-81d2-c1958e25403d" />
+    <div className="container py-5 px-3 text-light" style={{ maxWidth: '900px' }}>
+      <div className="bg-dark rounded-4 shadow p-4 p-md-5">
+        <h1 className="mb-4 fw-bold text-center text-primary">About eNotebook</h1>
 
-      {/* Form Inputs. Each input must have a name="" attribute */}
-      <label>
-        Name:
-        <input type="text" name="name" required />
-      </label>
+        <p className="mb-4 fs-5">
+          Welcome to <strong>eNotebook</strong>, your go-to solution for creating, saving, and managing notes
+          efficiently. Whether you're a student, professional, or someone who loves jotting down
+          thoughts, eNotebook is crafted to serve your note-taking needs.
+        </p>
 
-      <label>
-        Message:
-        <textarea name="message" required></textarea>
-      </label>
+        <h2 className="mt-5 mb-3 text-info">✨ Features</h2>
+        <ul className="fs-5">
+          <li>📝 Easy-to-use interface for creating and organizing notes</li>
+          <li>🔒 Secure cloud-based storage for anytime access</li>
+          <li>🔍 Powerful search to find notes instantly</li>
+          <li>📱 Fully responsive across all devices</li>
+        </ul>
 
-      {/* Submit Button */}
-      <button type="submit">Submit Form</button>
-    </form>
+        <h2 className="mt-5 mb-3 text-info">⚙️ How It Works</h2>
+        <p className="fs-5">
+          Sign up or log in to your account. Create, view, and organize notes effortlessly. All your notes are
+          securely stored in our database and available whenever you need them.
+        </p>
+
+        <h2 className="mt-5 mb-3 text-info">🎯 Our Mission</h2>
+        <p className="fs-5">
+          We aim to provide a seamless and efficient note-taking experience. With eNotebook, never lose
+          track of your thoughts or tasks. Focus on what matters—your ideas.
+        </p>
+
+        <h2 className="mt-5 mb-3 text-info">📬 Get in Touch</h2>
+        <p className="fs-5 mb-4">
+          We value your feedback. Contact us via the form below or email: <a href="mailto:officialaccjit@gmail.com" className="text-decoration-none text-white">officialaccjit@gmail.com</a>
+        </p>
+
+        {/* Contact Form */}
+        <form
+          action="https://api.web3forms.com/submit"
+          method="POST"
+          className="contact-form bg-secondary bg-opacity-25 rounded p-4"
+        >
+          <input type="hidden" name="access_key" value="fcd1603a-3c2d-418c-81d2-c1958e25403d" />
+
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">Name:</label>
+            <input type="text" name="name" className="form-control" required placeholder="Your name" />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="message" className="form-label">Message:</label>
+            <textarea name="message" className="form-control" rows="4" required placeholder="Your message..."></textarea>
+          </div>
+
+          <button type="submit" className="btn btn-primary w-100 mt-3">Send Message</button>
+        </form>
+      </div>
     </div>
   );
 };
 
-
-export default About
+export default About;

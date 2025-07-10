@@ -65,4 +65,29 @@
   .contact-form button:hover {
     background-color: #45a049;
   }
-  
+  /* Optional: Imagemodel.css or global CSS */
+input.form-control {
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+body {
+  background-color: #0d1117;
+}
+
+.about-container {
+  color: #f0f6fc;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background-color: #21262d;
+  color: #ffffff;
+  border: 1px solid #30363d;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #8b949e;
+}
